@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block title %} Feedbacks - {{ user.username }} {%
+endblock %} {% block content %}
+<form>
+  <div class="row">
+    <div class="col-sm-2">
+      <button
+        class="btn btn-secondary"
+        formmethod="POST"
+        formaction="/users/{{ user.username }}/delete"
+      >
+        Delete user
+      </button>
+    </div>
+    <div class="col-sm-2">
+      <button
+        class="btn btn-primary"
+        formaction="/users/{{ user.username }}/create"
+        formmethod="GET"
+      >
+        Add feedback
+      </button>
+    </div>
+  </div>
+</form>
+<h2>Profile Details</h2>
+<section>
+  <div class="row">
+    <div class="col-sm-1"><p>Username:</p></div>
+    <div class="col-sm-3"><p>{{user.username}}</p></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1"><p>Firstname:</p></div>
+    <div class="col-sm-3"><p>{{user.first_name}}</p></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1"><p>Lastname:</p></div>
+    <div class="col-sm-3"><p>{{user.last_name}}</p></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1"><p>Email:</p></div>
+    <div class="col-sm-3"><p>{{user.email}}</p></div>
+  </div>
+</section>
+<section>
+  <h3>Feedback</h3>
+  <div class="row">
+    {%for fb in user.feedback%}
+    <div class="col-sm-6">
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">{{fb.title}}</h5>
+        <p class="card-text">{{fb.content}}</p>
+        <div class="row">
+          <div class="col-sm-5">
+            <form>
+              <button
+                type="submit"
+                class="card-link"
+                formaction="/feedback/{{ fb.id }}/update"
+              >
+                Edit
+              </button>
+            </form>
+          </div>
+          <div class="col-sm-5">
+            <form>
+              <button
+                type="submit"
+                formaction="/feedback/{{ fb.id }}/delete"
+                formmethod="POST"
+                class="card-link"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  {%endfor%}
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block title %} Sign up now! {% endblock %} {% block
+content %}
+<form method="POST" , action="{{ url_for('do_register') }}">
+  {{form.hidden_tag()}} {% for field in form.errors %} {% for error in
+  form.errors[field] %}
+  <li>{{ error }}</li>
+  {% endfor %} {% endfor %} {% for field in form if field.widget.input_type !=
+  'hidden'%}
+  <div class="form-group row justify-content-center">
+    {{field.label(class="col-sm-2 col-form-label")}}
+    <div class="col-sm-4">{{field(class="form-control")}}</div>
+  </div>
+  {% endfor %}
+
+  <div class="row justify-content-center">
+    <button type="submit" class="btn btn-success col-sm-1">Submit</button>
+  </div>
+  <br />
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <p>Already have an account? <a href="/login">Log in</a></p>
+    </div>
+  </div>
+</form>
+{% endblock%}

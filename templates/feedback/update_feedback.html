@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %} Update your feedback{% endblock %}
+{% block content %}
+<form method="POST">
+  {{form.hidden_tag()}}{% for field in form if field.widget.input_type !=
+  'hidden'%}
+  <div class="row justify-content-center">
+    <div class="col-sm-1">{{field.label}}</div>
+    <div class="col-sm-3">{{field}}</div>
+  </div>
+  {% endfor %}
+  <div class="row justify-content-center">
+    <div class="col-sm-2">
+  <button type="submit" class="submitBtn">Update</button>
+    </div>
+    <div class="col-sm-2">
+  <a href="/users/{{username}}">Cancel</a>
+    </div>
+</form>
+
+{% endblock %}
